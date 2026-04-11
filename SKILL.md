@@ -1,8 +1,10 @@
 ---
 name: hermes-skill
-description: 🤖 AI 自进化技能包 — 自动从复杂任务创建可复用技能、HOT/WARM/COLD 分层记忆管理、智能 Nudge 提醒与定时自检，持续让 AI 越用越聪明。
+description: 🤖 AI 自进化技能包 — 自动从复杂任务创建可复用技能，HOT/WARM/COLD 分层记忆管理，智能 Nudge 提醒与定时自检，持续让 AI 越用越聪明。追踪 NousResearch/Hermes-Agent 上游演进。
 version: "1.1.0"
 author: devrobbin
+homepage: https://github.com/devrobbin/hermes-skill
+license: MIT
 keywords:
   - self-improving
   - auto-skill
@@ -13,7 +15,7 @@ keywords:
   - self-learning
   - openclaw-skill
   - upstream-tracker
-homepage: https://skills.sh/devrobbin/hermes-skill
+  - auto-evolution
 triggers:
   - 自进化
   - 自我学习
