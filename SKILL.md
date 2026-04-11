@@ -118,3 +118,31 @@ evo check                 # 完整自检
 ## 版本历史
 - v1.0.0: 初始版本（HOT/WARM/COLD + nudge + auto-skill）
 - v1.1.0: 新增上游追踪系统，对接 Hermes Agent 主线演进
+
+## 开发规范（重要）
+
+本技能包本身是自进化系统，任何模块有改进时必须遵守以下规则：
+
+### GitHub 同步规则
+> **每次自身技能进化必须同步到 GitHub 仓库**
+
+改进流程：
+1. 在本地 `~/.qclaw/skills/hermes-skill/` 改进代码
+2. `git add` + `git commit -m "描述"`
+3. `git push` 推送到 origin/main
+4. 同步更新 `SKILL.md` / `README.md` 说明（如果功能有变化）
+
+### Changelog 追加规则
+> 新增模块、重大重构或 API 变更 → 在 `upstream-tracker/changelog.md` 底部追加条目
+
+格式：
+```
+## YYYY-MM-DD — vX.X.X
+- [改进描述]
+- [文件变更]
+```
+
+### 避免事项
+- ❌ 只在本地改，不 push
+- ❌ 更新代码但不更新文档
+- ❌ 破坏已有的 upstream-tracker 状态文件

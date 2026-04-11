@@ -205,9 +205,33 @@ npx skills add devrobbin/hermes-skill@hermes-skill
 
 ---
 
-## Contributing
+## Contributing & Development Guidelines
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+This skill package is itself a self-evolving system. Any improvements to modules must follow these rules:
+
+### GitHub Sync Rule
+> **Every self-evolution must be pushed to the GitHub repo.**
+
+Workflow:
+1. Make improvements in `~/.qclaw/skills/hermes-skill/`
+2. `git add` + `git commit -m "description"`
+3. `git push` to origin/main
+4. Sync update `SKILL.md` / `README.md` if features changed
+
+### Changelog Rule
+> New modules, breaking changes, or API changes → append entry to `upstream-tracker/changelog.md`
+
+Format:
+```
+## YYYY-MM-DD — vX.X.X
+- [Change description]
+- [File changes]
+```
+
+### What NOT to do
+- ❌ Local-only changes, no push
+- ❌ Update code without updating docs
+- ❌ Overwrite existing upstream-tracker state files
 
 ## License
 

@@ -96,6 +96,16 @@ _...还有 15 个提交_
 - **agent/skill_commands.py**:
   ✅ Skill 评分与改进
 
+---
+
+## 本地技能进化记录
+
+### 2026-04-11 — v1.1.0 (开发规范固化)
+- 新增: `SKILL.md` 开发规范章节（GitHub 同步规则 + Changelog 追加规则）
+- 优化: SKILL.md 元数据（补充 license、keywords、triggers）
+- 规范: 每次自身进化必须 push 到 GitHub + 更新 README/SKILL.md
+- 规则: 新增模块/重大变更必须追加到 `upstream-tracker/changelog.md`
+
 > 每次同步后在此记录新发现和融合笔记
 
 ---
