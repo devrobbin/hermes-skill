@@ -23,18 +23,6 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).parent / "scripts"
 UPSTREAM_SCRIPT = SCRIPT_DIR / "upstream_tracker.py"
 
-COMMANDS = {
-    "nudge": "nudge_system.py",
-    "remember": "memory_tool.py --add",
-    "forget": "memory_tool.py --remove",
-    "search": "memory_tool.py --search",
-    "stats": "memory_tool.py --stats",
-    "skills": "auto_skill_creator.py --list",
-    "eval": "skill_evaluator.py --evaluate",
-    "improve": "skill_evaluator.py --improve",
-    "check": "self_check_cron.sh",
-}
-
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -55,47 +43,45 @@ def main():
             print(result.stderr, file=sys.stderr)
         return
 
-    if cmd not in COMMANDS:
+    if cmd not in ["nudge", "remember", "forget", "recall", "stats", "skills", "eval", "improve", "check"]:
         print(f"Unknown command: {cmd}")
         print(__doc__)
         return
 
-    script = COMMANDS[cmd]
-
     if cmd in ["nudge"]:
         if args:
             result = subprocess.run(
-                ["python3", str(SCRIPT_DIR / script), "--trigger", args[0]],
+                ["python3", str(SCRIPT_DIR / "nudge_system.py"), "--trigger", args[0]],
                 capture_output=True, text=True
             )
         else:
             result = subprocess.run(
-                ["python3", str(SCRIPT_DIR / script), "--check"],
+                ["python3", str(SCRIPT_DIR / "nudge_system.py"), "--check"],
                 capture_output=True, text=True
             )
-    elif cmd in ["remember", "forget", "search"]:
+    elif cmd in ["remember", "forget", "recall"]:
         result = subprocess.run(
-            ["python3", str(SCRIPT_DIR / script)] + args,
+            ["python3", str(SCRIPT_DIR / "memory_tool.py"), cmd] + args,
             capture_output=True, text=True
         )
     elif cmd == "stats":
         result = subprocess.run(
-            ["python3", str(SCRIPT_DIR / script), "--stats"],
+            ["python3", str(SCRIPT_DIR / "memory_tool.py"), "stats"],
             capture_output=True, text=True
         )
     elif cmd == "skills":
         result = subprocess.run(
-            ["python3", str(SCRIPT_DIR / script), "--list"],
+            ["python3", str(SCRIPT_DIR / "auto_skill_creator.py"), "--list"],
             capture_output=True, text=True
         )
     elif cmd in ["eval", "improve"]:
         result = subprocess.run(
-            ["python3", str(SCRIPT_DIR / script)] + [f"--{cmd}", args[0]],
+            ["python3", str(SCRIPT_DIR / "skill_evaluator.py")] + [f"--{cmd}", args[0]],
             capture_output=True, text=True
         )
     elif cmd == "check":
         result = subprocess.run(
-            [str(SCRIPT_DIR / script)],
+            ["bash", str(SCRIPT_DIR / "self_check_cron.sh")],
             capture_output=True, text=True
         )
 
