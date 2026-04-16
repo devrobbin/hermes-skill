@@ -633,6 +633,9 @@ if __name__ == "__main__":
     p_forget.add_argument("query")
     p_forget.add_argument("--tier", default="all")
 
+    p_stats = sub.add_parser("stats")
+    p_stats.add_argument("--tier", default="all")
+
     args = parser.parse_args()
 
     provider = BuiltinMemoryProvider()
@@ -645,6 +648,15 @@ if __name__ == "__main__":
         result = manager.handle_tool_call("recall", {"query": args.query, "tier": args.tier})
     elif args.cmd == "forget":
         result = manager.handle_tool_call("forget", {"query": args.query, "tier": args.tier})
+    elif args.cmd == "stats":
+        # 统计记忆数量
+        hot_count = len(provider._read_lines("hot"))
+        warm_count = len(provider._read_lines("warm"))
+        result = json.dumps({
+            "hot": hot_count,
+            "warm": warm_count,
+            "total": hot_count + warm_count
+        })
     else:
         result = tool_error("Unknown command")
 
